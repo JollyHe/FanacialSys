@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.3.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+       
+  
+        <context:property-placeholder location="classpath:jdbc.properties" />
+	     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+			<property name="driverClass" value="${mysql.driver}" />
+			<property name="jdbcUrl" value="${mysql.url}" />
+			<property name="user" value="${mysql.username}" />
+			<property name="password" value="${mysql.password}" />
+		</bean>
+	
+	    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	        <!-- 实例化sqlSessionFactory时需要使用上述配置好的数据源以及SQL映射文件 -->
+	        <property name="dataSource" ref="dataSource" />
+	        <property name="configuration">
+	            <bean class="org.apache.ibatis.session.Configuration">
+	                <property name="mapUnderscoreToCamelCase" value="true" />
+	                <property name="useGeneratedKeys" value="true" />
+	            </bean>
+	        </property>
+	        <!-- <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property> -->
+	        <!-- 别名 -->
+	        <property name="typeAliasesPackage" value="com.finacialdys.model.entity" />
+	        <property name="mapperLocations" value="classpath:com/finacialsys/mapper/*.xml" />
+	    </bean>
+    
+	    <!-- 配置扫描器 -->
+	    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	        <!-- 扫描cn.edu.uestc.ssm.dao这个包以及它的子包下的所有映射接口类 -->
+	        <property name="basePackage" value="com.finacialsys.mapper" />
+	        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	    </bean>
+        <context:component-scan base-package="com.finacialsys">
+			<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		</context:component-scan>
+       
+</beans>
