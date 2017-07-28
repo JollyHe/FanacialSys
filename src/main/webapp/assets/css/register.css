@@ -1,0 +1,77 @@
+body{
+	
+}
+.divAll{
+	width:800px;
+	font-family:'黑体';
+	margin:50px auto;
+}
+#titles{
+	font-weight:bold;
+	font-size:18px;
+	height:50px;
+	line-height: 50px;
+	background-color:rgba(240,250,255,0.2);
+	text-align:center;
+	border:1px;
+}
+#contents{
+	margin-top:20px;
+	background-color:rgba(240,250,255,0.2);
+	border:1px;
+	width:800px;
+}
+#form-itemGroup{
+	padding:10px;
+}
+.xinxi{
+	text-align:center;
+}
+#form-itemGroup > label{
+	display: inline-block;
+	width:100px;
+	height:32px;
+	line-height:32px;
+	color:#8b0000;
+	text-align: center;
+}
+.divBtn{
+	margin-top:20px;
+	margin-left:200px;
+	width:120px;
+	height:30px;
+	line-height: 32px;
+	background-color: #cc897c;
+	margin-bottom:10px;
+	color:#fff;
+	font-weight:bold;
+	border:none;
+	margin-left:350px;
+}
+.divBtn:hover{
+	background-color:#996699;
+}
+
+#form-itemGroup .user_ID{
+	width:200px;
+	height:40px;
+	line-height: 40;
+	border:1px solid #ccc;
+}
+#form-itemGroup .default{
+	width:200px;
+	height:32px;
+	line-height:32px;
+	color:#000;
+}
+#form-itemGroup .error{
+	height:32px;
+	line-height:32px;
+	color:#f00;
+}
+#form-itemGroup .success{
+	height:32px;
+	line-height: 32px;
+	color:#006400;
+}
+

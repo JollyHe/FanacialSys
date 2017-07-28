@@ -16,7 +16,7 @@
         <context:property-placeholder location="classpath:jdbc.properties" />
 	     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 			<property name="driverClass" value="${mysql.driver}" />
-			<property name="jdbcUrl" value="${mysql.url}" />
+			<property name="jdbcUrl" value="${mysql.url}?characterEncoding=utf-8" />
 			<property name="user" value="${mysql.username}" />
 			<property name="password" value="${mysql.password}" />
 		</bean>
@@ -32,7 +32,7 @@
 	        </property>
 	        <!-- <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property> -->
 	        <!-- 别名 -->
-	        <property name="typeAliasesPackage" value="com.finacialdys.model.entity" />
+	        <property name="typeAliasesPackage" value="com.finacialsys.model.entity" />
 	        <property name="mapperLocations" value="classpath:com/finacialsys/mapper/*.xml" />
 	    </bean>
     
