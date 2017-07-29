@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finacialsys.mapper.ExpandGroupMapper">
+     
+     <resultMap id="ExpandGroupMap" type="ExpandGroup">
+		    <id property = "outgroupID" column = "outgroup_ID" />
+		     <result property = "outgroupTime" column = "outgroup_Time" />
+		     <result property = "outgroupBrief" column = "outgroup_Brief" />
+		     <result property = "outgroupMsg" column = "outgroup_Msg" /> 
+		   <association property="user" javaType="User">
+             <id property = "userID" column = "user_ID" />		   
+		     <result property = "userName" column = "user_Name" /> 
+		   </association>
+   </resultMap>
+   
+   <select id="findOutGroupByID" parameterType = "string" resultMap="ExpandGroupMap">
+		SELECT 
+		u.user_ID, u.user_Name,
+		g.outgroup_Time, g.outgroup_Brief, g.outgroup_Msg
+		FROM 
+		users u JOIN tb_expand_group g 
+		ON 
+		u.user_ID = g.user_ID  
+		WHERE 
+		u.user_ID = #{userID}
+  </select> 
+  
+  <insert id="insertOutGroup" parameterType="ExpandGroup">
+        INSERT INTO tb_expand_group (user_ID,outgroup_Time,outgroup_Brief,outgroup_Msg)
+        VALUES (#{user.userID},#{outgroupTime},#{outgroupBrief},#{outgroupMsg})
+  </insert>
+  
+  <delete id="deleteOutGroup" parameterType = "int">
+        DELETE FROM tb_expand_group
+        WHERE outgroup_ID = #{outgroupID}
+  
+  </delete>
+  
+  <update id="updateOutGroup" parameterType="ExpandGroup">
+        UPDATE tb_expand_group
+        SET
+        outgroup_Time = #{outgroupTime},
+        outgroup_Brief = #{outgroupBrief},
+        outgroup_Msg = #{outgroupMsg}
+        WHERE
+        outgroup_ID = #{outgroupID}
+  </update>
+
+
+
+</mapper>

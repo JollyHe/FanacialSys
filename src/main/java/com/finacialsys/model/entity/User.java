@@ -1,8 +1,6 @@
 package com.finacialsys.model.entity;
 
-import java.util.List;
-
-public class User {
+public class User{
    
 	private String userID;
 	private String userPassword;
@@ -15,12 +13,6 @@ public class User {
 	private Level level;
 	
 	private UserGroup userGroup;
-	
-	private List<Expand> expands;
-	
-	private List<Income> incomes;
-	
-	
 
 	public String getUserID() {
 		return userID;
@@ -56,14 +48,6 @@ public class User {
 
 	public UserGroup getUserGroup() {
 		return userGroup;
-	}
-
-	public List<Expand> getExpands() {
-		return expands;
-	}
-
-	public List<Income> getIncomes() {
-		return incomes;
 	}
 
 	public void setUserID(String userID) {
@@ -102,20 +86,11 @@ public class User {
 		this.userGroup = userGroup;
 	}
 
-	public void setExpands(List<Expand> expands) {
-		this.expands = expands;
-	}
-
-	public void setIncomes(List<Income> incomes) {
-		this.incomes = incomes;
-	}
-
 	@Override
 	public String toString() {
 		return "User [userID=" + userID + ", userPassword=" + userPassword + ", userName=" + userName + ", userGender="
 				+ userGender + ", userNickname=" + userNickname + ", userAddress=" + userAddress + ", userPic="
-				+ userPic + ", level=" + level + ", userGroup=" + userGroup + ", expands=" + expands + ", incomes="
-				+ incomes + "]";
+				+ userPic + ", level=" + level + ", userGroup=" + userGroup + "]";
 	}
 
 }

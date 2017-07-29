@@ -6,7 +6,8 @@ public interface UserMapper {
 
 	User findByID(String userID);
 	int insertUser(User user);
-	int updateUser(String userID);
-	int delete(User user);
+	int updateUser(User user);
+	int delete(String userID);
 	
 }
+

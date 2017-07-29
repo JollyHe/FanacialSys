@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finacialsys.mapper.IncomeGroupMapper">
+    
+    <resultMap id="IncomeGroupMap" type="IncomeGroup">
+		    <id property = "incomegroupID" column = "ingroup_ID" />
+		     <result property = "incomegroupTime" column = "ingroup_Time" />
+		     <result property = "incomegroupBrief" column = "ingroup_Brief" />
+		     <result property = "incomegroupMsg" column = "ingroup_Msg" /> 
+		   <association property="user" javaType="User">
+             <id property = "userID" column = "user_ID" />		   
+		     <result property = "userName" column = "user_Name" /> 
+		   </association>
+   </resultMap>
+   
+   <select id="findInGroupByID" parameterType = "string" resultMap="IncomeGroupMap">
+		SELECT 
+		u.user_ID, u.user_Name,
+		i.ingroup_Time, i.ingroup_Brief, i.ingroup_Msg
+		FROM 
+		users u JOIN tb_income_group i 
+		ON 
+		u.user_ID = i.user_ID  
+		WHERE 
+		u.user_ID = #{userID}
+  </select> 
+
+   <insert id="insertInGroup" parameterType="IncomeGroup">
+        INSERT INTO tb_income_group (user_ID,ingroup_Time,ingroup_Brief,ingroup_Msg)
+        VALUES (#{user.userID},#{incomegroupTime},#{incomegroupBrief},#{incomegroupMsg})
+  </insert>
+  
+  <delete id="deleteInGroup" parameterType = "int">
+        DELETE FROM tb_income_group
+        WHERE ingroup_ID = #{incomegroupID}
+  
+  </delete>
+  
+  <update id="updateInGroup" parameterType="IncomeGroup">
+        UPDATE tb_income_group
+        SET
+        ingroup_Time = #{incomegroupTime},
+        ingroup_Brief = #{incomegroupBrief},
+        ingroup_Msg = #{incomegroupMsg}
+        WHERE
+        ingroup_ID = #{incomegroupID}
+  </update>
+
+
+</mapper>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finacialsys.mapper.IncomeMapper">
+    
+    <resultMap id="IncomeMap" type="Income">
+		    <id property = "inID" column = "in_ID" />
+		     <result property = "inMoney" column = "in_Money" />
+		     <result property = "inTime" column = "in_Time" />
+		     <result property = "inPlace" column = "in_Place" />
+		     <result property = "inMessage" column = "in_Message" />
+		   <association property="user" javaType="User">
+             <id property = "userID" column = "user_ID" />		   
+		     <result property = "userName" column = "user_Name" /> 
+		   </association>
+	</resultMap>
+     
+    <select id="findIncomeByID" parameterType = "string" resultMap="IncomeMap">
+		SELECT 
+		u.user_ID, u.user_Name,
+		i.in_Money, i.in_Time, i.in_Place, i.in_Message
+		FROM 
+		users u JOIN tb_income i
+		ON
+		u.user_ID = i.user_ID 
+		WHERE 
+		u.user_ID = #{userID}
+   </select> 
+   
+   <resultMap id="ByInGroupMap" type="Income">
+        <id property = "inID" column = "in_ID" />
+	     <result property = "inMoney" column = "in_Money" />
+	     <result property = "inTime" column = "in_Time" />
+	     <result property = "inPlace" column = "in_Place" />
+	     <result property = "inMessage" column = "in_Message" /> 
+	   <association property="incomegroup" javaType="IncomeGroup">
+            <id property = "incomegroupID" column = "ingroup_ID" />		   
+		     <result property = "incomegroupTime" column = "ingroup_Time" /> 
+		     <result property = "incomegroupBrief" column = "ingroup_Brief" /> 
+		     <result property = "incomegroupMsg" column = "ingroup_Msg" /> 
+	   </association>
+  </resultMap>
+  
+  <select id="findIncomeByGroup" parameterType = "int" resultMap="ByInGroupMap"> 
+        SELECT 
+        i.in_Money, i.in_Time, i.in_Place, i.in_Message,
+        g.ingroup_Time, g.ingroup_Brief, g.ingroup_Msg
+        FROM
+        tb_income i JOIN tb_income_group g
+        ON
+        i.ingroup_ID = g.ingroup_ID
+        WHERE
+        i.ingroup_ID = #{ingroupID}
+  </select>
+  
+  <resultMap id="ByInLogMap" type="Income">
+        <id property = "inID" column = "in_ID" />
+	     <result property = "inMoney" column = "in_Money" />
+	     <result property = "inTime" column = "in_Time" />
+	     <result property = "inPlace" column = "in_Place" />
+	     <result property = "inMessage" column = "in_Message" /> 
+	   <association property="log" javaType="Log">
+            <id property = "logID" column = "Log_ID" />		   
+		     <result property = "logName" column = "Log_Name" />
+	   </association>
+  </resultMap>
+  
+  <select id="findIncomeByLog" parameterType = "Income" resultMap="ByInLogMap"> 
+        SELECT 
+        i.in_Money, i.in_Time, i.in_Place, i.in_Message,
+        l.Log_ID, l.Log_Name,
+        u.user_ID
+        FROM
+        tb_income i JOIN tb_log l
+        ON
+        i.Log_ID = l.Log_ID JOIN users u
+        ON
+        i.user_ID = u.user_ID
+        WHERE
+        i.Log_ID = #{log.logID} AND i.user_ID = #{user.userID}
+  </select>
+     
+   <insert id="insertIncome" parameterType="Income">
+        INSERT INTO tb_income (user_ID,ingroup_ID,Log_ID,plan_ID,in_Money,in_Time,in_Place,in_Message)
+        VALUES (#{user.userID},#{incomegroup.incomegroupID},#{log.logID},#{plan.planID},#{inMoney},#{inTime},#{inPlace},#{inMessage})
+  </insert>
+  
+  <delete id="deleteIncome" parameterType="int">
+        DELETE FROM tb_income
+        WHERE in_ID = #{inID}
+  </delete>
+  
+  <update id="updateIncome" parameterType="Income">
+        UPDATE tb_income
+        SET
+        ingroup_ID = #{incomegroup.incomegroupID},
+        Log_ID = #{log.logID},
+        plan_ID = #{plan.planID},
+        in_Money = #{inMoney},
+        in_Time = #{inTime},
+        in_Place = #{inPlace},
+        in_Message = #{inMessage}
+        WHERE
+        in_ID = #{inID};
+  </update>
+  
+
+
+
+
+</mapper>

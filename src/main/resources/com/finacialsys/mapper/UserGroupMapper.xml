@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finacialsys.mapper.UserGroupMapper">
+    
+    <resultMap id="GroupMap" type="UserGroup">
+       <id property = "groupID" column = "group_ID" />
+	       <result property = "groupName" column = "group_Name" />
+	       <result property = "groupSum" column = "group_Sum" />
+	       <result property = "groupMsg" column = "group_Msg" />
+       <collection property="users" ofType="User">
+	         <id property = "userID" column = "user_ID" />
+		     <result property = "userName" column = "user_Name" />
+		     <result property = "userGender" column = "user_Gender" />
+		     <result property = "userNickname" column = "user_Nickname" />
+		     <result property = "userPic" column = "user_Pic" />
+       </collection>
+    </resultMap>
+    <select id="findByGroupID" parameterType="string" resultMap="GroupMap">
+       SELECT
+       g.group_ID, g.group_Name, g.group_Sum, g.group_Msg,
+       u.user_ID , u.user_Name , u.user_Gender, u.user_Nickname, u.user_Pic
+       FROM
+       tb_user_group g JOIN users u
+       ON
+       g.group_ID = u.group_ID
+       WHERE
+       g.group_ID = #{ groupID }
+    </select>
+    
+    <insert id="insertUserGroup" parameterType="UserGroup" >
+       INSERT INTO tb_user_group (group_ID,group_Name,group_Sum,group_Msg)
+       VALUES (#{groupID},#{groupName},#{groupSum},#{groupMsg})
+    </insert>
+    
+    <delete id="deleteUserGroup" parameterType="string" >
+       DELETE FROM tb_user_group
+       WHERE group_ID = #{groupID}
+    </delete>
+    
+    <update id="updateUserGroup" parameterType="UserGroup" >
+       UPDATE tb_user_group
+       SET
+       group_Name = #{groupName},
+       group_Sum = #{groupSum},
+       group_Msg = #{groupMsg}
+       WHERE
+       group_ID = #{groupID}
+    </update>
+
+</mapper>

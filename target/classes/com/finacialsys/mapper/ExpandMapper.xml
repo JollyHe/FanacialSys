@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finacialsys.mapper.ExpandMapper">
+
+   <resultMap id="ExpandMap" type="Expand">
+		    <id property = "outID" column = "out_ID" />
+		     <result property = "outMoney" column = "out_Money" />
+		     <result property = "outTime" column = "out_Time" />
+		     <result property = "outPlace" column = "out_Place" />
+		     <result property = "outMessage" column = "out_Message" /> 
+		   <association property="user" javaType="User">
+             <id property = "userID" column = "user_ID" />		   
+		     <result property = "userName" column = "user_Name" /> 
+		   </association>
+   </resultMap>
+   
+   <select id="findExpandByID" parameterType = "string" resultMap="ExpandMap">
+		SELECT 
+		u.user_ID, u.user_Name,
+		o.out_Money, o.out_Time, o.out_Place, o.out_Message
+		FROM 
+		users u JOIN tb_expand o 
+		ON 
+		u.user_ID = o.user_ID  
+		WHERE 
+		u.user_ID = #{userID}
+  </select> 
+  
+  <resultMap id="ByGroupMap" type="Expand">
+        <id property = "outID" column = "out_ID" />
+	     <result property = "outMoney" column = "out_Money" />
+	     <result property = "outTime" column = "out_Time" />
+	     <result property = "outPlace" column = "out_Place" />
+	     <result property = "outMessage" column = "out_Message" /> 
+	   <association property="expandgroup" javaType="ExpandGroup">
+            <id property = "outgroupID" column = "outgroup_ID" />		   
+		     <result property = "outgroupTime" column = "outgroup_Time" /> 
+		     <result property = "outgroupBrief" column = "outgroup_Brief" /> 
+		     <result property = "outgroupMsg" column = "outgroup_Msg" /> 
+	   </association>
+  </resultMap>
+  
+  <select id="findExpandByGroup" parameterType = "int" resultMap="ByGroupMap"> 
+        SELECT 
+        o.out_Money, o.out_Time, o.out_Place, o.out_Message,
+        g.outgroup_Time, g.outgroup_Brief, g.outgroup_Msg
+        FROM
+        tb_expand o JOIN tb_expand_group g
+        ON
+        o.outgroup_ID = g.outgroup_ID
+        WHERE
+        g.outgroup_ID = #{outgroupID}
+  </select>
+  
+  <resultMap id="ByLogMap" type="Expand">
+        <id property = "outID" column = "out_ID" />
+	     <result property = "outMoney" column = "out_Money" />
+	     <result property = "outTime" column = "out_Time" />
+	     <result property = "outPlace" column = "out_Place" />
+	     <result property = "outMessage" column = "out_Message" /> 
+	   <association property="log" javaType="Log">
+            <id property = "logID" column = "Log_ID" />		   
+		     <result property = "logName" column = "Log_Name" />
+	   </association>
+  </resultMap>
+  
+  <select id="findExpandByLog" parameterType = "Expand" resultMap="ByLogMap"> 
+        SELECT 
+        o.out_Money, o.out_Time, o.out_Place, o.out_Message,
+        l.Log_ID, l.Log_Name,
+        u.user_ID
+        FROM
+        tb_expand o JOIN tb_log l
+        ON
+        o.Log_ID = l.Log_ID JOIN users u
+        ON
+        o.user_ID = u.user_ID
+        WHERE
+        o.Log_ID = #{log.logID} AND o.user_ID = #{user.userID}
+  </select>
+  
+  <insert id="insertExpand" parameterType="Expand">
+        INSERT INTO tb_expand (user_ID,outgroup_ID,Log_ID,plan_ID,out_Money,out_Time,out_Place,out_Message)
+        VALUES (#{user.userID},#{expandgroup.outgroupID},#{log.logID},#{plan.planID},#{outMoney},#{outTime},#{outPlace},#{outMessage})
+  </insert>
+  
+  <delete id="deleteExpand" parameterType="int">
+        DELETE FROM tb_expand
+        WHERE out_ID = #{outID}
+  </delete>
+  
+  <update id="updateExpand" parameterType="Expand">
+        UPDATE tb_expand
+        SET
+        outgroup_ID = #{expandgroup.outgroupID},
+        Log_ID = #{log.logID},
+        plan_ID = #{plan.planID},
+        out_Money = #{outMoney},
+        out_Time = #{outTime},
+        out_Place = #{outPlace},
+        out_Message = #{outMessage}
+        WHERE
+        out_ID = #{outID};
+  </update>
+
+</mapper>

@@ -20,14 +20,27 @@
 		   </association>
 	 </resultMap>
   
-  <select id="findByID" parameterType = "string" resultMap="UserMap">
+    <select id="findByID" parameterType = "string" resultMap="UserMap">
 		SELECT 
-		user_ID ,user_Password
+		u.user_ID , u.user_Password, u.user_Name , u.user_Gender, u.user_Nickname, u.user_Pic,
+		g.group_ID, g.group_Name, g.group_Sum, g.group_Msg
 		FROM 
-		users
+		users u LEFT JOIN tb_user_group g
+		ON
+		u.group_ID = g.group_ID 
 		WHERE 
-		user_ID = #{userID}
+		u.user_ID = #{userID}
   </select> 
+   <update id="updateUser" parameterType="User">
+        UPDATE users
+        SET
+        user_Nickname = #{userNickname},
+        user_Password = #{userPassword},
+        user_Gender = #{userGender},
+        user_Address = #{userAddress},
+        user_pic = #{userPic}
+        WHERE user_ID = #{userID}
+  </update>
 
   <insert id="insertUser" parameterType="User">
         INSERT INTO users(user_ID,level_ID,user_Name,user_Nickname,user_Password,user_Gender,user_Address,user_Pic)
