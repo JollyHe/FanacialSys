@@ -2,7 +2,9 @@ package com.finacialsys.service;
 
 import java.util.List;
 
+import com.finacialsys.model.dto.Page;
 import com.finacialsys.model.entity.Income;
+
 
 public interface IncomeService {
 	
@@ -18,7 +20,10 @@ public interface IncomeService {
 	
 	List<Income> getIncomeByLogID(Income income);
 	
-	/*
-	Income getIncomeInPlan(int planID);
-	*/
+	Page getItems(int current, String userID);
+//	
+//	String sumIncome(SumMoney sumMoney);
+//	
+//	String sumIncomeInLog(SumMoney sumMoney);
+//	
 }

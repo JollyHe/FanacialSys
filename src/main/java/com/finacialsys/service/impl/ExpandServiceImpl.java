@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.finacialsys.mapper.ExpandMapper;
+import com.finacialsys.model.dto.Page;
 import com.finacialsys.model.entity.Expand;
+import com.finacialsys.model.entity.Log;
+import com.finacialsys.model.entity.User;
 import com.finacialsys.service.ExpandService;
 
 @Service
@@ -51,6 +54,32 @@ public class ExpandServiceImpl implements ExpandService {
 		
 		return expandMapper.findExpandByLog(expand);
 	}
+	
+	@Override
+	public Page getItems(int current,String userID) {
+		Page page = new Page(current);
+		int count = expandMapper.count(userID);
+		page.setCount(count);
+		int offset = page.getOffset();
+		int size = page.getSize();
+		System.out.println("offset: "+offset+" size:"+size+"userID"+userID);
+		List<Expand> items = expandMapper.showPage(offset,size, userID);
+		System.out.println(items);
+		page.setList(items);
+		return page;
+	}
+
+//	@Override
+//	public String sumExpand(SumMoney sumMoney) {
+//		
+//		return expandMapper.SumExpand(sumMoney);
+//	}
+//
+//	@Override
+//	public String sumExpandInLog(SumMoney sumMoney) {
+//		
+//		return expandMapper.SumExpandInLog(sumMoney);
+//	}
 
 	
 	/*

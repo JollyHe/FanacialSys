@@ -18,7 +18,7 @@
    <select id="findInGroupByID" parameterType = "string" resultMap="IncomeGroupMap">
 		SELECT 
 		u.user_ID, u.user_Name,
-		i.ingroup_Time, i.ingroup_Brief, i.ingroup_Msg
+		i.ingroup_Time, i.ingroup_Brief, i.ingroup_Msg, i.ingroup_ID
 		FROM 
 		users u JOIN tb_income_group i 
 		ON 

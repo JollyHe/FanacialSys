@@ -2,7 +2,11 @@ package com.finacialsys.service;
 
 import java.util.List;
 
+import com.finacialsys.model.dto.Page;
 import com.finacialsys.model.entity.Expand;
+import com.finacialsys.model.entity.Log;
+import com.finacialsys.model.entity.User;
+import com.finacialsys.model.dto.Page;
 
 public interface ExpandService {
 
@@ -18,7 +22,11 @@ public interface ExpandService {
 	
 	List<Expand> getExpandByLogID(Expand expand);
 	
-	/*
-	Expand getExpandInPlan(int planID);
-	*/
+	
+	Page getItems(int current, String userID);
+	
+//	String sumExpand(SumMoney sumMoney);
+//	
+//	String sumExpandInLog(SumMoney sumMoney);
+//	
 }

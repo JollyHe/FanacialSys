@@ -1,9 +1,11 @@
 body{
-	background-image: url("../img/20.jpg");
+	   background-image:url("../img/20.jpg");
+       background-size:100%;
+       background-repeat:no-repeat;
 }
 .divAll{
 	width:800px;
-	font-family:'黑体';
+	font-family: "黑体";
 	margin:50px auto;
 }
 #titles{
@@ -53,8 +55,9 @@ body{
 }
 
 #form-itemGroup .user_ID{
-	width:200px;
-	height:40px;
+	width:300px;
+	height:28px;
+	border-radius:8px;
 	line-height: 40;
 	border:1px solid #ccc;
 }
@@ -67,11 +70,10 @@ body{
 #form-itemGroup .error{
 	height:32px;
 	line-height:32px;
-	color:#f00;
+	color:#d00;
 }
 #form-itemGroup .success{
 	height:32px;
 	line-height: 32px;
-	color:#006400;
+	color:#0a0;
 }
-

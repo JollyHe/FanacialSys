@@ -19,7 +19,6 @@ public class SettingServiceImpl implements SettingService {
 	@Override
 	public int updateUser(User user) {
 		// TODO Auto-generated method stub
-		System.out.println("我进来了");
 		return userMapper.updateUser(user);
 	}
 

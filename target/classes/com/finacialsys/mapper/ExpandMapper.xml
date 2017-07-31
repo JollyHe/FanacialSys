@@ -14,16 +14,31 @@
              <id property = "userID" column = "user_ID" />		   
 		     <result property = "userName" column = "user_Name" /> 
 		   </association>
+		   <association property="log" javaType="Log">
+            <id property = "logID" column = "Log_ID" />		   
+		     <result property = "logName" column = "Log_Name" />
+	  		</association>
+	  		  <association property="expandgroup" javaType="ExpandGroup">
+            <id property = "outgroupID" column = "outgroup_ID" />		   
+		     <result property = "outgroupTime" column = "outgroup_Time" /> 
+		     <result property = "outgroupBrief" column = "outgroup_Brief" /> 
+		     <result property = "outgroupMsg" column = "outgroup_Msg" /> 
+	   </association>
    </resultMap>
    
    <select id="findExpandByID" parameterType = "string" resultMap="ExpandMap">
 		SELECT 
 		u.user_ID, u.user_Name,
-		o.out_Money, o.out_Time, o.out_Place, o.out_Message
+		o.out_Money, o.out_Time, o.out_Place, o.out_Message, o.out_ID,
+		l.Log_ID, l.Log_Name,
+		e.outgroup_ID,e.outgroup_Brief
 		FROM 
 		users u JOIN tb_expand o 
 		ON 
-		u.user_ID = o.user_ID  
+		u.user_ID = o.user_ID JOIN tb_log l
+		ON
+		o.Log_ID = l.Log_ID JOIN tb_expand_group e
+		on o.outgroup_ID = e.outgroup_ID
 		WHERE 
 		u.user_ID = #{userID}
   </select> 
@@ -42,6 +57,32 @@
 	   </association>
   </resultMap>
   
+  <select id="showPage"  resultMap="ExpandMap">
+  	select * from(
+		<!-- select 
+		
+	    from 
+		tb_expand o JOIN tb_log l
+		ON
+		o.Log_ID = l.Log_ID
+		where user_ID = #{userID} -->
+		SELECT 
+		u.user_ID, u.user_Name,
+		o.out_Money, o.out_Time, o.out_Place, o.out_Message, o.out_ID,
+		l.Log_ID, l.Log_Name,
+		e.outgroup_ID,e.outgroup_Brief
+		FROM 
+		users u JOIN tb_expand o 
+		ON 
+		u.user_ID = o.user_ID JOIN tb_log l
+		ON
+		o.Log_ID = l.Log_ID JOIN tb_expand_group e
+		on o.outgroup_ID = e.outgroup_ID
+		WHERE 
+		u.user_ID = #{userID}
+	) as b limit #{offset}, #{size}
+  </select>
+  
   <select id="findExpandByGroup" parameterType = "int" resultMap="ByGroupMap"> 
         SELECT 
         o.out_Money, o.out_Time, o.out_Place, o.out_Message,
@@ -52,6 +93,12 @@
         o.outgroup_ID = g.outgroup_ID
         WHERE
         g.outgroup_ID = #{outgroupID}
+  </select>
+  
+  <select id="count" parameterType = "String" resultType="int"> 
+        SELECT count(1)
+        from tb_expand
+        where tb_expand.user_ID = #{userID}
   </select>
   
   <resultMap id="ByLogMap" type="Expand">

@@ -1,0 +1,115 @@
+.clearfix:after {
+content: ".";
+display: block;
+clear: both;
+visibility: hidden;
+line-height: 0;
+height: 0;
+}
+.clearfix {
+	display: inline-block;
+}
+html[xmlns] .clearfix {
+	display: block;
+}
+* html .clearfix {
+	height: 1%;
+}
+*{margin:0; padding:0;}
+body,html{width:100%; height:100%;}
+.bg {
+	position: absolute;
+	top: 78px;
+	left: 0;
+	width: 100%;
+	height: 580px;
+}
+.bg-box-1{
+    background: url('../img/1.jpg') no-repeat center/cover; 
+}
+.bg-box-2{
+	background: url('../img/2.jpg') no-repeat center/cover;
+}
+.bg-box-3{
+	background: url('../img/3.jpg') no-repeat center/cover;
+}
+.bg-box-4{
+	background: url('../img/4.jpg') no-repeat center/cover;
+}
+#wrap{
+	position: absolute;
+	overflow: hidden;
+	top:0; left:0; right:0; bottom:0;
+	margin:auto;
+	width: 1000px;
+	height: 400px;
+}
+#wrap ul{
+	width: 120%;
+	list-style: none;
+}
+#wrap > ul > li{
+	float: left;
+	width: 100px;
+	height: 400px;
+	cursor: pointer;
+}
+#wrap > ul > li:nth-child(1){
+	background: url('../img/1.jpg') no-repeat center/cover;
+}
+#wrap > ul > li:nth-child(2){
+	background: url('../img/2.jpg') no-repeat center/cover;
+}
+#wrap > ul > li:nth-child(3){
+	background: url('../img/3.jpg') no-repeat center/cover;
+}
+#wrap > ul > li:nth-child(4){
+	background: url('../img/4.jpg') no-repeat center/cover;
+	width: 700px;
+}	
+#wrap > ul > li > .text{
+	width: 100px;
+	height: 100%;
+	background: #000;
+	opacity: .5;
+}
+#wrap > ul > li .Team{
+	width: 600px;
+	height: 100%;
+	font-family: 'Microsoft yahei';
+	color: #fff;
+	font-size: 30px;
+	margin:-130px;
+	margin-left:100px;
+}
+#wrap > ul > li .Team p{
+	padding-top: 30px;
+}
+#wrap > ul > li .Team ul > li{
+	padding-top: 20px;
+	font-size: 20px;
+	color: #FFF;
+}
+#wrap > ul > li > .hide {
+    overflow: hidden;
+} 
+#wrap > ul > li > .text p{
+	padding: 20px 40px;
+	font-family: 'Microsoft yahei';
+	color: #fff;
+}
+.th{
+	color:#ffb6c1;
+	font-size: 26px;
+}
+.th1{
+	color:#ffa500;
+}
+
+.home{}
+.home1 {}
+.home2{}
+.home3{}
+#nav-list > li{
+	padding-top: 30px;
+}

@@ -18,7 +18,7 @@
    <select id="findOutGroupByID" parameterType = "string" resultMap="ExpandGroupMap">
 		SELECT 
 		u.user_ID, u.user_Name,
-		g.outgroup_Time, g.outgroup_Brief, g.outgroup_Msg
+		g.outgroup_Time, g.outgroup_Brief, g.outgroup_Msg, g.outgroup_ID
 		FROM 
 		users u JOIN tb_expand_group g 
 		ON 

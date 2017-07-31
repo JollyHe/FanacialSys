@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finacialsys.mapper.PlanMapper">
+
+    <resultMap id="planMap" type="Plan">
+        <id property="planID" column="plan_ID" />
+        <result property="planName" column="plan_Name" />
+        <result property="beginTime" column="begin_Time" />
+        <result property="endTime" column="end_Time" />
+        <result property="planMoney" column="plan_Money" />
+        <result property="planMsg" column="plan_Msg" />
+       <association property="user" javaType="User">
+         <id property = "userID" column = "user_ID" />		   
+	     <result property = "userName" column = "user_Name" /> 
+	   </association>
+    </resultMap>
+    
+    <select id = "findPlanByUserID" parameterType = "string" resultMap="planMap">
+        SELECT 
+        u.user_ID, u.user_Name,
+        p.plan_Name, p.begin_Time, p.end_Time, p.plan_Money, p.plan_Msg
+        FROM
+        users u JOIN tb_plan p
+        ON 
+        p.user_ID = u.user_ID
+        WHERE
+        p.user_ID = #{userID}
+    </select>
+    
+    <insert id="insertPlan" parameterType = "Plan">
+        INSERT INTO tb_plan (user_ID,plan_Name,begin_Time,end_Time,plan_Money,plan_Msg)
+        VALUES (#{user.userID},#{planName},#{beginTime},#{endTime},#{planMoney},#{planMsg})
+    </insert>
+    
+    <delete id="deletePlan" parameterType = "int">
+        DELETE FROM tb_plan
+        WHERE plan_ID = #{planID}
+    </delete>
+    
+    <update id="updatePlan" parameterType = "Plan">
+        UPDATE tb_plan
+        SET
+        plan_Name = #{planName},
+        begin_Time = #{beginTime},
+        end_Time = #{endTime},
+        plan_Money = #{planMoney},
+        plan_Msg = #{planMsg}
+        WHERE
+        plan_ID = #{planID}
+    </update>
+
+</mapper>

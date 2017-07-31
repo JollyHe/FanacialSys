@@ -1,10 +1,11 @@
 function checkForm(){
+	var IDtip = checkuser_ID();
+	var nametip = checkuser_Name();
 	var passtip = checkuser_Password();
-	var gendertip = checkuser_Gender();
-	var nicknametip = checkuser_Nickname();
-	var addresstip = checkuser_Address();
-	return passtip && gendertip && nicknametip && addresstip;
+	return IDtip && nametip && passtip;
 }
+
+
 function checkuser_Password(){
 	var user_Password = document.getElementById('user_Password');
 	var errPassword = document.getElementById('user_PasswordErr');
@@ -40,26 +41,7 @@ function ConfirmPassword(){
 		return true;
 	}
 }
-function checkuser_Gender(){
-	var user_Gender = document.getElementById('user_Gender');
-	var errGender = document.getElementById('user_GenderErr');
-	var pattern = /^+$/;//验证是否为中文
-	if(user_Gender.value.length == 0){
-		errGender.innerHTML="用户密码不能为空"
-		errGender.className="error"
-		return false;
-	}
-	if(!pattern.test(user_Gender.value)){
-		errGender.innerHTML="用户密码不和规范"
-		errGender.className="error"
-		return false;
-	}
-	else{
-		errGender.innerHTML="ok"
-		errGender.className="success";
-		return true;
-	}
-}
+
 function checkuser_Nickname(){
 	var user_Nickname = document.getElementById('user_Nickname');
 	var errNickname = document.getElementById('user_NicknameErr');

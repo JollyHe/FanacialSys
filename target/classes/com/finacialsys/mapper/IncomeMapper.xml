@@ -14,19 +14,51 @@
              <id property = "userID" column = "user_ID" />		   
 		     <result property = "userName" column = "user_Name" /> 
 		   </association>
+		      <association property="log" javaType="Log">
+            <id property = "logID" column = "Log_ID" />		   
+		     <result property = "logName" column = "Log_Name" />
+	   </association>
+	    <association property="incomegroup" javaType="IncomeGroup">
+            <id property = "incomegroupID" column = "ingroup_ID" />		   
+		     <result property = "incomegroupTime" column = "ingroup_Time" /> 
+		     <result property = "incomegroupBrief" column = "ingroup_Brief" /> 
+		     <result property = "incomegroupMsg" column = "ingroup_Msg" /> 
+	   </association>
 	</resultMap>
      
     <select id="findIncomeByID" parameterType = "string" resultMap="IncomeMap">
 		SELECT 
 		u.user_ID, u.user_Name,
-		i.in_Money, i.in_Time, i.in_Place, i.in_Message
+		i.in_Money, i.in_Time, i.in_Place, i.in_Message, i.in_ID,
+		l.Log_ID, l.Log_Name
 		FROM 
 		users u JOIN tb_income i
 		ON
-		u.user_ID = i.user_ID 
+		u.user_ID = i.user_ID JOIN tb_log l
+		ON
+		i.Log_ID = l.Log_ID
 		WHERE 
 		u.user_ID = #{userID}
    </select> 
+   
+     <select id="showPage"  resultMap="IncomeMap">
+  	select * from(
+		SELECT 
+		u.user_ID, u.user_Name,
+		i.in_Money, i.in_Time, i.in_Place, i.in_Message, i.in_ID,
+		l.Log_ID, l.Log_Name,
+		g.ingroup_ID, g.ingroup_Brief
+		FROM 
+		users u JOIN tb_income i
+		ON
+		u.user_ID = i.user_ID JOIN tb_log l
+		ON
+		i.Log_ID = l.Log_ID JOIN tb_income_group g
+		on i.ingroup_ID = g.ingroup_ID
+		WHERE 
+		u.user_ID = #{userID}
+	) as b limit #{offset}, #{size}
+  </select>
    
    <resultMap id="ByInGroupMap" type="Income">
         <id property = "inID" column = "in_ID" />
@@ -81,6 +113,12 @@
         i.Log_ID = #{log.logID} AND i.user_ID = #{user.userID}
   </select>
      
+   <select id="count" parameterType = "String" resultType="int"> 
+        SELECT count(1)
+        from tb_income
+        where tb_income.user_ID = #{userID}
+  </select>
+  
    <insert id="insertIncome" parameterType="Income">
         INSERT INTO tb_income (user_ID,ingroup_ID,Log_ID,plan_ID,in_Money,in_Time,in_Place,in_Message)
         VALUES (#{user.userID},#{incomegroup.incomegroupID},#{log.logID},#{plan.planID},#{inMoney},#{inTime},#{inPlace},#{inMessage})

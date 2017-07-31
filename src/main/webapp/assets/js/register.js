@@ -29,7 +29,7 @@ function checkuser_ID(){
 function checkuser_Name(){
 	var user_Name = document.getElementById('user_Name');
 	var errName = document.getElementById('user_NameErr');
-	var pattern = /^\w{3,}$/;
+	var pattern = /^[\u4E00-\u9FA5]{2,4}$|^[A-Za-z]+$/;
 	if(user_Name.value.length == 0){
 		errName.innerHTML="用户姓名不能为空"
 		errName.className="error"
@@ -81,20 +81,7 @@ function ConfirmPassword(){
 		return true;
 	}
 }
-function checkuser_Gender(){
-	var user_Gender = document.getElementById('user_Gender');
-	var errGender = document.getElementById('user_GenderErr');
-	if(user_Gender.value.length == 0){
-		errGender.innerHTML="用户性别不能为空"
-		errGender.className="error"
-		return false;
-	}
-	else{
-		errGender.innerHTML="ok"
-		errGender.className="success";
-		return true;
-	}
-}
+
 function checkuser_Nickname(){
 	var user_Nickname = document.getElementById('user_Nickname');
 	var errNickname = document.getElementById('user_NicknameErr');

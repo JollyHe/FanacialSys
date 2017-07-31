@@ -14,8 +14,10 @@ import com.finacialsys.model.entity.Level;
 import com.finacialsys.model.entity.User;
 import com.finacialsys.service.ExpandGroupService;
 import com.finacialsys.service.ExpandService;
+import com.finacialsys.service.IncomeGroupService;
 import com.finacialsys.service.LoginService;
 import com.finacialsys.model.entity.ExpandGroup;
+import com.finacialsys.model.entity.IncomeGroup;
 @Controller
 public class LoginController {
 
@@ -24,6 +26,9 @@ public class LoginController {
 	
 	@Autowired
 	public ExpandGroupService expandGroupService;
+	
+	@Autowired
+	public IncomeGroupService incomeGroupService;
 	
 	@RequestMapping(value="/index", method=RequestMethod.GET)
 	public String toIndex(HttpSession session){
@@ -88,6 +93,7 @@ public class LoginController {
 	@RequestMapping( value="/register",method=RequestMethod.POST )
 	public String register(User user,Model model){
 		ExpandGroup expandGroup = new ExpandGroup();
+		IncomeGroup incomeGroup = new IncomeGroup();
 		try {
 			System.out.println(user);
 			user.setLevel(new Level());
@@ -102,6 +108,11 @@ public class LoginController {
 				expandGroup.setOutgroupBrief("其他");
 				expandGroup.setOutgroupMsg("这是一个系统自带的其他组");
 				expandGroupService.establishExpandGroup(expandGroup);
+				incomeGroup.setUser(user);
+				incomeGroup.setIncomegroupTime(formatter.format(utilDate));
+				incomeGroup.setIncomegroupBrief("其他");
+				incomeGroup.setIncomegroupMsg("这是一个系统自带的其他组");
+				incomeGroupService.establishIncomeGroup(incomeGroup);
 				System.out.println("插入成功");
 
 				
