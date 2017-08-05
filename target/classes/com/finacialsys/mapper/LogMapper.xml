@@ -26,5 +26,18 @@
           SELECT Log_ID , Log_Name 
           FROM tb_log
      </select>
+     
+     <select id="findLogByID" parameterType="int" resultType="Log">
+          SELECT Log_ID , Log_Name 
+          FROM tb_log
+          where Log_ID = #{logID}
+     </select>
+     
+       <select id="selectLog" parameterType="int" resultType="string">
+          SELECT Log_Name 
+          FROM tb_log
+          WHERE
+          Log_ID = #{logID}
+     </select>
 
 </mapper>

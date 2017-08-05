@@ -14,6 +14,8 @@ public interface IncomeService {
 	
 	int editIncome(Income income);
 	
+	int resetPlan(int planID);
+	
 	List<Income> getIncomeByUserID(String userID);
 	
 	List<Income> getIncomeByGroupID(int groupID);
@@ -21,6 +23,8 @@ public interface IncomeService {
 	List<Income> getIncomeByLogID(Income income);
 	
 	Page getItems(int current, String userID);
+	Page getItemsByID(int current, String userID, int groupID);
+	
 //	
 //	String sumIncome(SumMoney sumMoney);
 //	

@@ -18,5 +18,14 @@ public class LogServiceImpl implements LogService {
 		// TODO Auto-generated method stub
 		return logMapper.findAllLog();
 	}
+	@Override
+	public Log findLogByID(int logID) {
+		// TODO Auto-generated method stub
+		return logMapper.findLogByID(logID);
+	}
+
+	public String getLogName(int logID){
+		return logMapper.selectLog(logID);
+	}
 
 }

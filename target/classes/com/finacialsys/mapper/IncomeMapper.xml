@@ -40,6 +40,12 @@
 		WHERE 
 		u.user_ID = #{userID}
    </select> 
+     <select id="findIncomeByPlan" parameterType = "int" resultMap="IncomeMap">
+		select * from tb_income
+		JOIN tb_plan 
+		on tb_plan.plan_ID = tb_income.plan_ID
+		where tb_income.plan_ID = #{planID}
+   </select>
    
      <select id="showPage"  resultMap="IncomeMap">
   	select * from(
@@ -59,6 +65,25 @@
 		u.user_ID = #{userID}
 	) as b limit #{offset}, #{size}
   </select>
+  
+    <select id="showPageByID"  resultMap="IncomeMap">
+  	select * from(
+		SELECT 
+		u.user_ID, u.user_Name,
+		i.in_Money, i.in_Time, i.in_Place, i.in_Message, i.in_ID,
+		l.Log_ID, l.Log_Name,
+		g.ingroup_ID, g.ingroup_Brief
+		FROM 
+		users u JOIN tb_income i
+		ON
+		u.user_ID = i.user_ID JOIN tb_log l
+		ON
+		i.Log_ID = l.Log_ID JOIN tb_income_group g
+		on i.ingroup_ID = g.ingroup_ID
+		WHERE 
+		u.user_ID = #{userID} and g.ingroup_ID = #{groupID}
+	) as b limit #{offset}, #{size}
+  </select>
    
    <resultMap id="ByInGroupMap" type="Income">
         <id property = "inID" column = "in_ID" />
@@ -74,15 +99,20 @@
 	   </association>
   </resultMap>
   
-  <select id="findIncomeByGroup" parameterType = "int" resultMap="ByInGroupMap"> 
+  <select id="findIncomeByGroup" parameterType = "int" resultMap="IncomeMap"> 
         SELECT 
-        i.in_Money, i.in_Time, i.in_Place, i.in_Message,
-        g.ingroup_Time, g.ingroup_Brief, g.ingroup_Msg
-        FROM
-        tb_income i JOIN tb_income_group g
-        ON
-        i.ingroup_ID = g.ingroup_ID
-        WHERE
+		u.user_ID, u.user_Name,
+		i.in_Money, i.in_Time, i.in_Place, i.in_Message, i.in_ID,
+		l.Log_ID, l.Log_Name,
+		g.ingroup_ID, g.ingroup_Brief
+		FROM 
+		users u JOIN tb_income i
+		ON
+		u.user_ID = i.user_ID JOIN tb_log l
+		ON
+		i.Log_ID = l.Log_ID JOIN tb_income_group g
+		on i.ingroup_ID = g.ingroup_ID
+		WHERE 
         i.ingroup_ID = #{ingroupID}
   </select>
   
@@ -113,10 +143,16 @@
         i.Log_ID = #{log.logID} AND i.user_ID = #{user.userID}
   </select>
      
-   <select id="count" parameterType = "String" resultType="int"> 
+   <select id="countIncome" parameterType = "String" resultType="int"> 
         SELECT count(1)
         from tb_income
         where tb_income.user_ID = #{userID}
+  </select>
+  
+   <select id="countByINGID"  resultType="int"> 
+         SELECT count(1)
+        from tb_income
+        where tb_income.user_ID = #{userID} and tb_income.ingroup_ID = #{groupID}
   </select>
   
    <insert id="insertIncome" parameterType="Income">
@@ -143,7 +179,14 @@
         in_ID = #{inID};
   </update>
   
-
+  <update id="resetIncomePlan" parameterType="int">
+        UPDATE tb_income
+        SET
+        plan_ID = null
+        WHERE
+        plan_ID = #{planID};
+  </update>
+  
 
 
 

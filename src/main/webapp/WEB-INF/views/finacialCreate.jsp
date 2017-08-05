@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-theme.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/nav.css">
+    <link href="assets/img/favicon-20170803111016817.ico" rel="SHORTCUT ICON">
     <link rel="stylesheet" type="text/css" href="assets/css/finacialCreate.css">
 </head>
 <body>
@@ -19,9 +20,9 @@
           <li class="li-1"><a href="home">主页</a></li>
           <li class="li-2"><a href="finacialCreate">收支创建</a></li>
           <li class="li-3"><a href="expandShow">我的收支</a></li>
-          <li class="li-4"><a href="#">数据分析</a></li>
-          <li class="li-5"><a href="#">我的计划</a></li>
-          <li class="li-6"><a href="#">我的家庭组</a></li>
+          <li class="li-4"><a href="data">数据分析</a></li>
+          <li class="li-5"><a href="plan">我的计划</a></li>
+          <li class="li-6"><a href="userGroup">我的家庭组</a></li>
           <div class="current">
               <div class="top-arrow"></div>   
               <div class="current-back"></div>
@@ -53,19 +54,19 @@
 			</div>
 			<div class="row ">
 				<div class="cell col-md-4" id="left">
-					<a href="#">
+					<a href="createIncomeGroup">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 						<br>
 						<span>创建收入组</span>
 					</a>
 				</div>
 				<div class="cell col-md-4" id="center">
-					<div>
-						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+					<div id="divImg">
+				
 					</div>
 				</div>
 				<div class="cell col-md-4" id="right">
-					<a href="#">
+					<a href="createExpandGroup">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 						<br>
 						<span>创建支出组</span>

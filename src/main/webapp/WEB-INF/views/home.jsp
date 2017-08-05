@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/nav.css">
     <link rel="stylesheet" type="text/css" href="assets/css/home.css">
+    <link href="assets/img/favicon-20170803111016817.ico" rel="SHORTCUT ICON">
     <link rel="stylesheet" type="text/css" href="assets/css/homeBg.css">
 </head>
 <body>
@@ -18,9 +19,9 @@
           <li class="li-1"><a href="home" style="font-size: 14px">主页</a></li>
           <li class="li-2"><a href="finacialCreate" style="font-size: 14px">收支创建</a></li>
           <li class="li-3"><a href="expandShow" style="font-size: 14px">我的收支</a></li>
-          <li class="li-4"><a href="#" style="font-size: 14px">数据分析</a></li>
-          <li class="li-5"><a href="#" style="font-size: 14px">我的计划</a></li>
-          <li class="li-6"><a href="#" style="font-size: 14px">我的家庭组</a></li>
+          <li class="li-4"><a href="data" style="font-size: 14px">数据分析</a></li>
+          <li class="li-5"><a href="plan" style="font-size: 14px">我的计划</a></li>
+          <li class="li-6"><a href="userGroup" style="font-size: 14px">我的家庭组</a></li>
           <div class="current">
               <div class="top-arrow"></div>   
               <div class="current-back"></div>
@@ -78,10 +79,10 @@
 					<!-- <p>团队组成:</p><br/> -->
 					<ul class="Team">
 						<li style="padding-left: 40px;padding-top:80px">成员：彭璨麒  电子科技大学信软学院</li>
-						<li style="padding-left: 130px">唐浩 电子科技大学信软学院</li>
-						<li style="padding-left: 130px">江洋 电子科技大学信软学院</li>
-						<li style="padding-left: 130px">陈振宁 电子科技大学信软学院</li>
-						<li style="padding-left: 130px">何佳霓 电子科技大学信软学院</li>
+						<li style="padding-left: 130px;padding-top:20px">唐浩 电子科技大学信软学院</li>
+						<li style="padding-left: 130px;padding-top:20px">江洋 电子科技大学信软学院</li>
+						<li style="padding-left: 130px;padding-top:20px">陈振宁 电子科技大学信软学院</li>
+						<li style="padding-left: 130px;padding-top:20px">何佳霓 电子科技大学信软学院</li>
 					</ul>
 				</div>
 			</li>

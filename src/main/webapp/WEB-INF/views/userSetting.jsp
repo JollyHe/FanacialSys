@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>设置更改</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/register.css"/>
+	<link href="assets/img/favicon-20170803111016817.ico" rel="SHORTCUT ICON">
 </head>
 <body>
 <div class="divAll">
@@ -32,7 +33,7 @@
     <div id="form-itemGroup">
     	<label for="user_Address">用户地址</label>
         <input type="text" name="userAddress" id="user_Address" class="user_ID" onBlur="checkuser_Address()" oninput="checkuser_Address()">
-        <span class="default" id="user_AddressErr">请输入用户地址</span>
+        <span class="default" id="user_AddressErr"></span>
     </div>
     <div id="form-itemGroup">
     <label for="user_Pic">用户头像</label>
@@ -44,7 +45,7 @@
         <input type="radio" value="2" name="userGender"/>女
     </div>
     <div>
-    	<button  type="submit" form="setting" class="divBtn">提交</button>
+    	<button id="myb" disabled="disabled" form="setting" type="submit" class="divBtn" onmouseover="date()">提交</button>
     </div>
     </form>
 

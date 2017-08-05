@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finacialsys.mapper.DetailMapper">
+
+    <resultMap id="DetailMap" type="Detail">
+        <id property="detailID" column="detail_ID" />
+        <result property="detailMsg" column="detail_Msg"/>
+        <result property="detailMoney" column="detail_Money" />
+        <association property="plan" javaType="Plan">
+           <id property="planID" column="plan_ID" />
+           <result property="planName" column="plan_Name" />
+        </association>
+        <association property="log" javaType="Log">
+           <id property="logID" column="Log_ID" />
+           <id property="logName" column="Log_Name" />
+        </association>
+    </resultMap>
+    <select id="findDetailByPlanLog" parameterType = "Detail" resultMap="DetailMap">
+        SELECT
+        d.detail_Msg, d.detail_Money,
+        p.plan_Name,
+        l.log_Name
+        FROM
+        tb_detail d JOIN tb_plan p
+        ON
+        d.plan_ID = p.plan_ID JOIN tb_log l
+        ON
+        d.Log_ID = l.Log_ID
+        WHERE
+        d.plan_ID = #{plan.planID} AND d.Log_ID = #{log.logID}
+    </select>
+    
+    <resultMap id="PlanDetailMap" type="Detail">
+        <id property="detailID" column="detail_ID" />
+        <result property="detailMsg" column="detail_Msg"/>
+        <result property="detailMoney" column="detail_Money" />
+        <association property="plan" javaType="Plan">
+           <id property="planID" column="plan_ID" />
+           <result property="planName" column="plan_Name" />
+        </association>
+        <association property="log" javaType="Log">
+           <id property="logID" column="Log_ID" />
+           <id property="logName" column="Log_Name" />
+        </association>
+    </resultMap>
+    
+    <select id="findDetailByPlanID" parameterType = "int" resultMap="PlanDetailMap">
+        SELECT
+        d.detail_ID,d.detail_Msg, d.detail_Money,
+        p.plan_Name,
+        l.log_Name, l.log_ID
+        FROM
+        tb_detail d JOIN tb_plan p
+        ON
+        d.plan_ID = p.plan_ID  JOIN tb_log l
+        ON
+        d.Log_ID = l.Log_ID
+        WHERE
+        d.plan_ID = #{planID}
+    </select>
+    
+    <select id="getDetailByID" parameterType = "int" resultMap="PlanDetailMap">
+    	select * from tb_detail 
+    	where tb_detail.detail_ID = #{detailID}
+    </select>
+    
+    <update id="updateDetail" parameterType = "Detail">
+        UPDATE tb_detail
+        SET
+        detail_Msg = #{detailMsg},
+        detail_Money = #{detailMoney}
+        WHERE
+        detail_ID = #{detailID}
+    </update>
+    
+    <delete id="deleteDetail" parameterType = "int">
+        DELETE FROM tb_detail
+        WHERE detail_ID = #{detailID}
+    </delete>
+    
+    <delete id="removeDetails" parameterType = "int">
+        DELETE FROM tb_detail
+        WHERE plan_ID = #{planID}
+    </delete>
+    
+    <insert id="insertDetail" parameterType = "Detail">
+        INSERT INTO tb_detail (plan_ID,Log_ID,detail_Msg,detail_Money)
+        VALUES (#{plan.planID},#{log.logID},#{detailMsg},#{detailMoney})
+    </insert>
+</mapper>

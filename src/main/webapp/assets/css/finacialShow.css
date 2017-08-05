@@ -104,9 +104,10 @@
 
 .bordered{
   height: 400px;
-  border: 1px solid black;
 }
-
+.bordered a{
+  color:#ddd;
+}
 .font{
   height: 80px;
 }

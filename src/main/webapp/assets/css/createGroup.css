@@ -1,0 +1,212 @@
+
+*,:after,:before{box-sizing:border-box}
+.clearfix:after,.clearfix:before{content:'';display:table}
+.clearfix:after{clear:both;display:block}
+a{color:inherit;text-decoration:none;}
+input, button {
+  outline: none;
+  border: none;
+}
+.login-wrap{
+  width:100%;
+  margin:auto;
+  max-width:525px;
+  min-height:550px;
+  position:relative;
+  background:url(../img/bg.jpg) no-repeat center;
+  box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+.login-html{
+  width:100%;
+  height:100%;
+  position:absolute;
+  padding:90px 70px 50px 70px;
+  background:rgba(40,57,101,.7);
+}
+
+.login-html .sign-in,
+.login-html .sign-up,
+.login-form .group .check{
+  display:none;
+}
+.login-html .tab,
+.login-form .group .label,
+.login-form .group .button{
+  text-transform:uppercase;
+}
+.login-html .tab{
+  font-size:22px;
+  margin-right:15px;
+  padding-bottom:5px;
+  margin:0 15px 10px 0;
+  display:inline-block;
+  border-bottom:2px solid transparent;
+}
+.login-html .sign-in:checked + .tab,
+.login-html .sign-up:checked + .tab{
+  color:#fff;
+  border-color:#1161ee;
+}
+
+.login-form .group{
+  margin-bottom:15px;
+}
+.login-form .group .label,
+.login-form .group .input,
+.login-form .group .button{
+  width:100%;
+  color:#fff;
+  display:block;
+}
+.login-form .group .input,
+.login-form .group .button{
+  border:none;
+  padding:15px 20px;
+  border-radius:25px;
+  background:rgba(255,255,255,.1);
+}
+
+.login-form .group .label{
+  color:#aaa;
+  font-size:12px;
+}
+.login-form .group .button{
+  background:#1161ee;
+}
+.login-form .group .button:hover{
+  background:#c71585;
+}
+.login-form .group label .icon{
+  width:15px;
+  height:15px;
+  border-radius:2px;
+  position:relative;
+  display:inline-block;
+  background:rgba(255,255,255,.1);
+}
+
+
+.login-form .group .check:checked + label{
+  color:#fff;
+}
+.login-form .group .check:checked + label .icon{
+  background:#1161ee;
+}
+.hr{
+  height:2px;
+  margin:60px 0 50px 0;
+  background:rgba(255,255,255,.2);
+}
+.foot-lnk{
+  text-align:center;
+}
+.label2{
+  resize: none;
+  width:385px;
+  height:100px;
+}
+.label3{
+  resize: none;
+  width:385px;
+  height:80px;
+}
+.current{
+  position:absolute;
+  left:15%;
+  margin-left: -49px;
+  width:100px;
+  height: 80px;
+  -webkit-transition: all 400ms cubic-bezier(.45,1.92,.9,1.54);
+  -moz-transition: all 400ms cubic-bezier(.45,1.92,.9,1.54);
+  -o-transition: all 400ms cubic-bezier(.45,1.92,.9,1.54);
+  -ms-transition: all 400ms cubic-bezier(.45,1.92,.9,1.54);
+  transition: all 400ms cubic-bezier(.16,1.23,.87,1.18);
+}
+.current-back{
+  width:100%;
+  height:100%;
+  position:absolute;
+  background:#696969;
+  border-radius:5px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.09);
+  border-top: 2px solid rgba(255,255,255,0.1);
+}
+.top-arrow{
+  position:absolute;
+  overflow:hidden;
+  width:100%;
+  height:12px;
+  top:13px;
+  left:0;
+  z-index:2;
+}
+.top-arrow:before{
+  content:"";
+  position:absolute;
+  width:80%;
+  height:10px;
+  top:-10px;
+  left:10%;
+  border-radius:20%;
+  box-shadow:0 0 10px black;
+}
+.top-arrow:after{
+  content:"";
+  position:absolute;
+  width:0;
+  height:0;
+  top:0px;
+  border-top:8px solid #696969;
+  border-left:6px solid transparent;
+  border-right:6px solid transparent;
+  margin-left:-6px;
+  left:50%;
+}
+
+.bottom-arrow{
+  position:absolute;
+  overflow:hidden;
+  width:100%;
+  height:12px;
+  bottom:17px;
+  left:0;
+  z-index:2;
+}
+.bottom-arrow:before{
+  content:"";
+  position:absolute;
+  width:80%;
+  height:10px;
+  bottom:-10px;
+  left:10%;
+  border-radius:20%;
+  box-shadow:0 0 10px black;
+}
+.bottom-arrow:after{
+  content:"";
+  position:absolute;
+  width:0;
+  height:0;
+  bottom:0;
+  border-bottom:12px solid #696969;
+  border-left:8px solid transparent;
+  border-right:8px solid transparent;
+  margin-left:-8px;
+  left:50%;
+}
+
+.li-1:hover ~ .current{
+  left: 5%;
+}
+.li-3:hover ~ .current{
+ left: 25%;
+}
+.li-4:hover ~ .current{  
+   left: 35%;
+}
+.li-5:hover ~ .current{
+  left: 45%;  
+}
+.li-6:hover ~ .current{
+  left: 55%; 
+}

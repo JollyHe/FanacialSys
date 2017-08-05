@@ -10,5 +10,6 @@ public interface LogMapper {
 	int updateLog(Log log);
 	int deleteLog(String logName);
 	List<Log> findAllLog();
-	
+	Log findLogByID(int logID);
+	String selectLog(int logID);
 }

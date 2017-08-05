@@ -2,6 +2,8 @@ package com.finacialsys.service;
 
 import java.util.List;
 
+import com.finacialsys.model.dto.Page;
+import com.finacialsys.model.entity.ExpandGroup;
 import com.finacialsys.model.entity.IncomeGroup;
 
 public interface IncomeGroupService {
@@ -10,7 +12,11 @@ public interface IncomeGroupService {
 	
 	int removeIncomeGroup(int ingroupID);
 	
-	int editExpandGroup(IncomeGroup incomeGroup);
+	int editIncomeGroup(IncomeGroup incomeGroup);
 	
 	List<IncomeGroup> getIncomeGroup(String userID);
+	
+	Page getItems(int current, String userID);
+	
+	IncomeGroup getOtherGroup(String userID);
 }

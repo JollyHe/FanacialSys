@@ -43,6 +43,13 @@
 		u.user_ID = #{userID}
   </select> 
   
+   <select id="findExpandByPlan" parameterType = "int" resultMap="ExpandMap">
+		select * from tb_expand
+		JOIN tb_plan
+		on tb_plan.plan_ID = tb_expand.plan_ID
+		where tb_expand.plan_ID = #{planID}
+  </select> 
+  
   <resultMap id="ByGroupMap" type="Expand">
         <id property = "outID" column = "out_ID" />
 	     <result property = "outMoney" column = "out_Money" />
@@ -83,22 +90,58 @@
 	) as b limit #{offset}, #{size}
   </select>
   
-  <select id="findExpandByGroup" parameterType = "int" resultMap="ByGroupMap"> 
-        SELECT 
-        o.out_Money, o.out_Time, o.out_Place, o.out_Message,
-        g.outgroup_Time, g.outgroup_Brief, g.outgroup_Msg
-        FROM
-        tb_expand o JOIN tb_expand_group g
-        ON
-        o.outgroup_ID = g.outgroup_ID
-        WHERE
-        g.outgroup_ID = #{outgroupID}
+   <select id="showPageByGroupID"  resultMap="ExpandMap">
+  	select * from(
+		<!-- select 
+		
+	    from 
+		tb_expand o JOIN tb_log l
+		ON
+		o.Log_ID = l.Log_ID
+		where user_ID = #{userID} -->
+		SELECT 
+		u.user_ID, u.user_Name,
+		o.out_Money, o.out_Time, o.out_Place, o.out_Message, o.out_ID,
+		l.Log_ID, l.Log_Name,
+		e.outgroup_ID,e.outgroup_Brief
+		FROM 
+		users u JOIN tb_expand o 
+		ON 
+		u.user_ID = o.user_ID JOIN tb_log l
+		ON
+		o.Log_ID = l.Log_ID JOIN tb_expand_group e
+		on o.outgroup_ID = e.outgroup_ID
+		WHERE 
+		u.user_ID = #{userID} and e.outgroup_ID = #{groupID}
+	) as b limit #{offset}, #{size}
+  </select>
+  <select id="findExpandByGroup" parameterType = "int" resultMap="ExpandMap"> 
+       SELECT 
+		u.user_ID, u.user_Name,
+		o.out_Money, o.out_Time, o.out_Place, o.out_Message, o.out_ID,
+		l.Log_ID, l.Log_Name,
+		e.outgroup_ID,e.outgroup_Brief
+		FROM 
+		users u JOIN tb_expand o 
+		ON 
+		u.user_ID = o.user_ID JOIN tb_log l
+		ON
+		o.Log_ID = l.Log_ID JOIN tb_expand_group e
+		on o.outgroup_ID = e.outgroup_ID
+		WHERE 
+		e.outgroup_ID = #{outgroupID}
   </select>
   
-  <select id="count" parameterType = "String" resultType="int"> 
+  <select id="countExpand" parameterType = "String" resultType="int"> 
         SELECT count(1)
         from tb_expand
         where tb_expand.user_ID = #{userID}
+  </select>
+  
+  <select id="countByEXGID"  resultType="int"> 
+         SELECT count(1)
+        from tb_expand
+        where tb_expand.user_ID = #{userID} and tb_expand.outgroup_ID = #{groupID}
   </select>
   
   <resultMap id="ByLogMap" type="Expand">
@@ -151,5 +194,25 @@
         WHERE
         out_ID = #{outID};
   </update>
+  
+  
+  <update id="resetPlan" parameterType="int">
+        UPDATE tb_expand
+        SET
+     	plan_ID = null
+        WHERE
+        plan_ID = #{planID};
+  </update>
+  
+  <select id = "SumExpandInLog" parameterType="SumMoney" resultType="Double">
+        SELECT SUM(out_Money) 
+        FROM tb_expand
+        WHERE
+        out_Time BETWEEN #{headTime} AND #{tailTime} 
+        AND
+        Log_ID = #{logID}
+        AND 
+        user_ID = #{userID}
+  </select>
 
 </mapper>

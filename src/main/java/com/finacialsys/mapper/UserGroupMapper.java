@@ -8,5 +8,5 @@ public interface UserGroupMapper {
 	int insertUserGroup(UserGroup userGroup);
 	int deleteUserGroup(String groupID);
 	int updateUserGroup(UserGroup userGroup);
-	
+	int SumGroupMember(String groupID);
 }

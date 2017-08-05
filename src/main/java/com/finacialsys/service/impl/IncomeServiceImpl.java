@@ -31,15 +31,36 @@ public class IncomeServiceImpl implements IncomeService {
 	}
 
 	@Override
+	public int resetPlan(int planID) {
+		// TODO Auto-generated method stub
+		return incomeMapper.resetIncomePlan(planID);
+	}
+
+	@Override
 	public Page getItems(int current, String userID) {
 		// TODO Auto-generated method stub
 		Page page = new Page(current);
-		int count = incomeMapper.count(userID);
+		int count = incomeMapper.countIncome(userID);
 		page.setCount(count);
 		int offset = page.getOffset();
 		int size = page.getSize();
 		System.out.println("offset: "+offset+" size:"+size+"userID"+userID);
 		List<Income> items = incomeMapper.showPage(offset,size, userID);
+		System.out.println(items);
+		page.setList(items);
+		return page;
+	}
+
+	@Override
+	public Page getItemsByID(int current, String userID, int groupID) {
+		// TODO Auto-generated method stub
+		Page page = new Page(current);
+		int count = incomeMapper.countByINGID(userID, groupID);
+		page.setCount(count);
+		int offset = page.getOffset();
+		int size = page.getSize();
+		System.out.println("offset: "+offset+" size:"+size+"userID"+userID);
+		List<Income> items = incomeMapper.showPageByID(offset,size, userID, groupID);
 		System.out.println(items);
 		page.setList(items);
 		return page;

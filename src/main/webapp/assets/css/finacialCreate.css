@@ -91,6 +91,10 @@
 	text-decoration: none;
 	background: rgba(225,225,225,0.5);
 }
+#divImg{
+	 background-image: url(../img/60.png);
+	  background-size: contain;
+}
 #bottom{
 	padding-top: 28px;
 }

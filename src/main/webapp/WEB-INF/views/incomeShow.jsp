@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/nav.css">
     <link rel="stylesheet" type="text/css" href="assets/css/finacialShow.css">
+    <link href="assets/img/favicon-20170803111016817.ico" rel="SHORTCUT ICON">
  
 </head>
 <body>
@@ -20,9 +21,9 @@
           <li class="li-1"><a href="home">主页</a></li>
           <li class="li-2"><a href="finacialCreate">收支创建</a></li>
           <li class="li-3"><a href="expandShow">我的收支</a></li>
-          <li class="li-4"><a href="#">数据分析</a></li>
-          <li class="li-5"><a href="#">我的计划</a></li>
-          <li class="li-6"><a href="#">我的家庭组</a></li>
+          <li class="li-4"><a href="data">数据分析</a></li>
+          <li class="li-5"><a href="plan">我的计划</a></li>
+          <li class="li-6"><a href="userGroup">我的家庭组</a></li>
           <div class="current">
               <div class="top-arrow"></div>   
               <div class="current-back"></div>
@@ -53,11 +54,11 @@
             <span class="line1"></span> <span class="line2"></span> <span class="line3"></span> <span class="line4"></span> 收入显示
           </div>
           <div style="clear:both"></div>
-          <div class="set_9_btn-corner"> 
+          <div class="set_9_btn-corner" id="expandGroupShow"> 
             <span class="line1"></span> <span class="line2"></span> <span class="line3"></span> <span class="line4"></span> 支出组显示
           </div>
           <div style="clear:both"></div>
-          <div class="set_9_btn-corner"> 
+          <div class="set_9_btn-corner" id="incomeGroupShow"> 
             <span class="line1"></span> <span class="line2"></span> <span class="line3"></span> <span class="line4"></span> 收入组显示
           </div>
           <div style="clear:both"></div>
@@ -91,7 +92,7 @@
 								</td>
 								<td title="${ income.inMessage }" class="message"><p class="message">${income.inMessage}</p></td>
 								<td>
-									<a href="/account/${param.p }/${a.aid }">编辑</a>
+									<a href="editIncome/${page.current}/${income.inID}">修改</a>
 									<a href="incomeShow/removeIncome/${page.current}/${income.inID}">删除</a>
 								</td>
 							</tr>
@@ -122,7 +123,7 @@
 								</td>
 								<td title="${ income.inMessage }" class="message"><p class="message">${income.inMessage}</p></td>
 								<td>
-									<a href="/account/${param.p }/${a.aid }">编辑</a>
+									<a href="editIncome/${page.current}/${income.inID}">修改</a>
 									<a href="incomeShow/removeIncome/${page.current}/${income.inID}">删除</a>
 								</td>
 							</tr>
@@ -172,7 +173,7 @@
 	               		<div class="input-group">
 	               			<span class="input-group-addon">${page.current }/${page.total }</span>
 							<input type="text" id="toPageIpt" class="form-control">
-							<span class="input-group-btn"><button id="toPage"  class="btn btn-default">跳转</button></span>
+							<span class="input-group-btn"><a id="jump" class="btn btn-default">跳转</a></span>
 						</div>
 	               </form>
                </div>
@@ -183,11 +184,11 @@
 	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="assets/js/finacialShow.js"></script>
 	<script type="text/javascript">
-		$("#toPage").click(function(){
-			var page = $("#toPageIpt").val();
-			alert(page);
-			if(page >=1 || page <= '${page.total}'){
-				location.href = "incomeShow?current="+page;
+		$("#toPageIpt").change(function(){
+			var pageNum = $("#toPageIpt").val();
+			pageNum = parseInt(pageNum);
+			if(pageNum >=1 && pageNum <=${page.total}){
+				$('#jump').attr("href","incomeShow?current="+pageNum);
 			}
 		});
 	</script>

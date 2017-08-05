@@ -12,8 +12,12 @@ public interface IncomeMapper {
 	List<Income> findIncomeByGroup(int groupID);
 	List<Income> findIncomeByLog(Income income);
 	List<Income> showPage(@Param("offset")int offset,@Param("size") int size, @Param("userID")String userID);
+	List<Income> showPageByID(@Param("offset")int offset,@Param("size") int size, @Param("userID")String userID,@Param("groupID")int groupID);
 	int insertIncome(Income income);
 	int deleteIncome(int incomeID);
 	int updateIncome(Income income);
-	int count(String userID);
+	int countIncome(String userID);
+	int countByINGID(@Param("userID")String userID,@Param("groupID")int groupID);
+	int resetIncomePlan(int planID);
+	List<Income> findIncomeByPlan(int planID);
 }

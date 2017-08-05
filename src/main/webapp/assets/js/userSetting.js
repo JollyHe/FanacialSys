@@ -1,15 +1,13 @@
 function checkForm(){
-	var IDtip = checkuser_ID();
-	var nametip = checkuser_Name();
 	var passtip = checkuser_Password();
-	return IDtip && nametip && passtip;
+	var nicktip = checkuser_Nickname();
+	return passtip && nicktip;
 }
-
 
 function checkuser_Password(){
 	var user_Password = document.getElementById('user_Password');
 	var errPassword = document.getElementById('user_PasswordErr');
-	var pattern = /^\w{4,8}$/;
+	var pattern = /^\w{4,11}$/;
 	if(user_Password.value.length == 0){
 		errPassword.innerHTML="用户密码不能为空"
 		errPassword.className="error"
@@ -54,5 +52,10 @@ function checkuser_Nickname(){
 		errNickname.innerHTML="ok"
 		errNickname.className="success";
 		return true;
+	}
+}
+function date(){
+	if(checkuser_Nickname() == true && checkuser_Password() == true){
+		document.getElementById("myb").disabled=false;
 	}
 }

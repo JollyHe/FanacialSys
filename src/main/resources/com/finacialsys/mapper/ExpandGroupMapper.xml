@@ -14,7 +14,19 @@
 		     <result property = "userName" column = "user_Name" /> 
 		   </association>
    </resultMap>
-   
+     <select id="showPage"  resultMap="ExpandGroupMap">
+  	select * from(
+		SELECT 
+		u.user_ID, u.user_Name,
+		g.outgroup_Time, g.outgroup_Brief, g.outgroup_Msg, g.outgroup_ID
+		FROM 
+		users u JOIN tb_expand_group g 
+		ON 
+		u.user_ID = g.user_ID  
+		WHERE 
+		u.user_ID = #{userID}
+	) as b limit #{offset}, #{size}
+  </select>
    <select id="findOutGroupByID" parameterType = "string" resultMap="ExpandGroupMap">
 		SELECT 
 		u.user_ID, u.user_Name,
@@ -26,6 +38,17 @@
 		WHERE 
 		u.user_ID = #{userID}
   </select> 
+  
+    <select id="count" parameterType = "String" resultType="int"> 
+        SELECT count(1)
+        from tb_expand_group
+        where tb_expand_group.user_ID = #{userID}
+  </select>
+  
+  <select id="findOtherGroup"  parameterType="String"  resultMap="ExpandGroupMap">
+  		SELECT * from tb_expand_group
+  		where tb_expand_group.outgroup_Brief = "其他" and tb_expand_group.user_ID = #{userID}
+  </select>
   
   <insert id="insertOutGroup" parameterType="ExpandGroup">
         INSERT INTO tb_expand_group (user_ID,outgroup_Time,outgroup_Brief,outgroup_Msg)
@@ -41,7 +64,6 @@
   <update id="updateOutGroup" parameterType="ExpandGroup">
         UPDATE tb_expand_group
         SET
-        outgroup_Time = #{outgroupTime},
         outgroup_Brief = #{outgroupBrief},
         outgroup_Msg = #{outgroupMsg}
         WHERE

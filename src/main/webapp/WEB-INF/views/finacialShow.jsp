@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-theme.css">
     <link rel="stylesheet" type="text/css" href=".assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/nav.css">
+    <link href="assets/img/favicon-20170803111016817.ico" rel="SHORTCUT ICON">
     <link rel="stylesheet" type="text/css" href="assets/css/finacialShow.css">
  
 </head>
@@ -20,9 +21,9 @@
           <li class="li-1"><a href="home">主页</a></li>
           <li class="li-2"><a href="finacialCreate">收支创建</a></li>
           <li class="li-3"><a href="expandShow">我的收支</a></li>
-          <li class="li-4"><a href="#">数据分析</a></li>
-          <li class="li-5"><a href="#">我的计划</a></li>
-          <li class="li-6"><a href="#">我的家庭组</a></li>
+          <li class="li-4"><a href="data">数据分析</a></li>
+          <li class="li-5"><a href="plan">我的计划</a></li>
+          <li class="li-6"><a href="userGroup">我的家庭组</a></li>
           <div class="current">
               <div class="top-arrow"></div>   
               <div class="current-back"></div>
@@ -61,11 +62,11 @@
             <span class="line1"></span> <span class="line2"></span> <span class="line3"></span> <span class="line4"></span> 支出显示
           </div>
           <div style="clear:both"></div>
-          <div class="set_9_btn-corner"> 
+          <div class="set_9_btn-corner" id="incomeGroupShow"> 
             <span class="line1"></span> <span class="line2"></span> <span class="line3"></span> <span class="line4"></span> 收入组显示
           </div>
           <div style="clear:both"></div>
-          <div class="set_9_btn-corner"> 
+          <div class="set_9_btn-corner" id="expandGroupShow"> 
             <span class="line1"></span> <span class="line2"></span> <span class="line3"></span> <span class="line4"></span> 支出组显示
           </div>
           <div style="clear:both"></div>

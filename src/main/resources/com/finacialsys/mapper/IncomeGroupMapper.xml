@@ -14,7 +14,19 @@
 		     <result property = "userName" column = "user_Name" /> 
 		   </association>
    </resultMap>
-   
+   <select id="showPage"  resultMap="IncomeGroupMap">
+  	select * from(
+		SELECT 
+		u.user_ID, u.user_Name,
+		i.ingroup_Time, i.ingroup_Brief, i.ingroup_Msg, i.ingroup_ID
+		FROM 
+		users u JOIN tb_income_group i 
+		ON 
+		u.user_ID = i.user_ID  
+		WHERE 
+		u.user_ID = #{userID}
+	) as b limit #{offset}, #{size}
+  </select>
    <select id="findInGroupByID" parameterType = "string" resultMap="IncomeGroupMap">
 		SELECT 
 		u.user_ID, u.user_Name,
@@ -26,7 +38,16 @@
 		WHERE 
 		u.user_ID = #{userID}
   </select> 
-
+  
+ <select id="findOtherGroup"  parameterType="String"  resultMap="IncomeGroupMap">
+  		SELECT * from tb_income_group
+  		where tb_income_group.ingroup_Brief = "其他" and tb_income_group.user_ID = #{userID}
+  </select>
+    <select id="count" parameterType = "String" resultType="int"> 
+        SELECT count(1)
+        from tb_income_group
+        where tb_income_group.user_ID = #{userID}
+  </select>
    <insert id="insertInGroup" parameterType="IncomeGroup">
         INSERT INTO tb_income_group (user_ID,ingroup_Time,ingroup_Brief,ingroup_Msg)
         VALUES (#{user.userID},#{incomegroupTime},#{incomegroupBrief},#{incomegroupMsg})
@@ -41,7 +62,6 @@
   <update id="updateInGroup" parameterType="IncomeGroup">
         UPDATE tb_income_group
         SET
-        ingroup_Time = #{incomegroupTime},
         ingroup_Brief = #{incomegroupBrief},
         ingroup_Msg = #{incomegroupMsg}
         WHERE

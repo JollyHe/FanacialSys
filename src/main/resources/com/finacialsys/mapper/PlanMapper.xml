@@ -17,16 +17,30 @@
 	   </association>
     </resultMap>
     
-    <select id = "findPlanByUserID" parameterType = "string" resultMap="planMap">
-        SELECT 
+    <select id = "findPlanByUserID" parameterType="String" resultMap="planMap">
+     SELECT 
         u.user_ID, u.user_Name,
-        p.plan_Name, p.begin_Time, p.end_Time, p.plan_Money, p.plan_Msg
+        p.plan_ID,p.plan_Name, p.begin_Time, p.end_Time, p.plan_Money, p.plan_Msg
         FROM
         users u JOIN tb_plan p
         ON 
         p.user_ID = u.user_ID
         WHERE
         p.user_ID = #{userID}
+    </select>
+    
+     <select id = "getPlanByID" parameterType = "int" resultMap="planMap">
+        select * from tb_plan
+       where tb_plan.plan_ID = #{planID}
+    </select>
+    
+     <select id = "getPlanByDetailID" parameterType = "int" resultMap="planMap">
+        select * from tb_plan
+        JOIN tb_detail
+        on
+        tb_plan.plan_ID = tb_detail.plan_ID
+        where
+        tb_detail.detail_ID = #{detailID}
     </select>
     
     <insert id="insertPlan" parameterType = "Plan">

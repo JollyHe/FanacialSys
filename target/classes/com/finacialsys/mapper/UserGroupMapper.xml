@@ -43,10 +43,19 @@
        UPDATE tb_user_group
        SET
        group_Name = #{groupName},
-       group_Sum = #{groupSum},
        group_Msg = #{groupMsg}
        WHERE
        group_ID = #{groupID}
     </update>
+    
+      <select id="SumGroupMember" parameterType="string" resultType="int">
+       SELECT count(1) 
+       FROM 
+       users u LEFT JOIN tb_user_group g
+       ON 
+       u.group_ID = g.group_ID 
+       WHERE u.group_ID = #{groupID}
+    </select>
+    
 
 </mapper>

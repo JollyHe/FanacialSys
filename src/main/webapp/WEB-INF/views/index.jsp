@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>家庭财务管理系统</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/index.css"/>
+	<link href="assets/img/favicon-20170803111016817.ico" rel="SHORTCUT ICON">
 </head>
 <body>
 	<div class="bottom-grid2" >
