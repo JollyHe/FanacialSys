@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-    <title>创建支出</title>
+    <title>创建收入</title>
   	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/nav.css">

@@ -177,6 +177,10 @@ public class FinacialShowController {
 	public String removeExpandGroup(@PathVariable(name="p") int current,@PathVariable(name="id") int id,HttpSession session){
 		User user = (User)session.getAttribute("user");
 		ExpandGroup other = expandGroupService.getOtherGroup(user.getUserID());
+		if(other.getOutgroupID() == id)
+		{
+			return null;
+		}
 		List<Expand> expands =   expandService.getExpandByGroupID(id);
 		for (Expand expand : expands) {
 			expand.setExpandgroup(other);
@@ -226,6 +230,10 @@ public class FinacialShowController {
 	public String removeIncomeGroup(@PathVariable(name="p") int current,@PathVariable(name="id") int id,HttpSession session){
 		User user = (User)session.getAttribute("user");
 		IncomeGroup other = incomeGroupService.getOtherGroup(user.getUserID());
+		if(other.getIncomegroupID() == id)
+		{
+			return null;
+		}
 		List<Income> incomes =   incomeService.getIncomeByGroupID(id);
 		for (Income income : incomes) {
 			income.setIncomegroup(other);

@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>主页</title>
+    <title>成员支出显示</title>
   	<link rel="stylesheet" href="assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-theme.css">

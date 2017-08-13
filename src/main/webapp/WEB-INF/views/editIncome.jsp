@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-    <title>创建支出</title>
+    <title>编辑收入</title>
   	<link rel="stylesheet" type="text/css" href="/FinacialSys/assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/FinacialSys/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="/FinacialSys/assets/css/nav.css">

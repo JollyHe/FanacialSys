@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>收入组的创建</title>
+    <title>创建收入组</title>
     <link rel="stylesheet" href="assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-theme.css">

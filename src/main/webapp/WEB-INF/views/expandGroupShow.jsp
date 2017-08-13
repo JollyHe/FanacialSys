@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>主页</title>
+    <title>支出组显示</title>
   	<link rel="stylesheet" href="assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-theme.css">
@@ -86,8 +86,10 @@
 								</td>
 								<td>
 									<a href="showExpandGroupDetails/${page.current}/${expandGroup.outgroupID}">查看详情</a>
-									<a href="editExpandGroup/${page.current}/${expandGroup.outgroupID}">修改</a>
-									<a href="expandGroupShow/removeExpandGroup/${page.current}/${expandGroup.outgroupID}">删除</a>
+									<c:if test="${ !expandGroup.outgroupBrief.equals('其他') }">
+										<a href="editExpandGroup/${page.current}/${expandGroup.outgroupID}">修改</a>
+										<a href="expandGroupShow/removeExpandGroup/${page.current}/${expandGroup.outgroupID}">删除</a>
+									</c:if>
 								</td>
 							</tr>
 						</c:forEach>

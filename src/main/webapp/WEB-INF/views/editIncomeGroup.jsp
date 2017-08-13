@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>支出组的创建</title>
+    <title>编辑收入组</title>
     <link rel="stylesheet" href="/FinacialSys/assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="/FinacialSys/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/FinacialSys/assets/css/bootstrap-theme.css">

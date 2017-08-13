@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/data.css"/>
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-theme.css">
+    <link href="assets/img/favicon-20170803111016817.ico" rel="SHORTCUT ICON">
 	<script type="text/javascript" src="assets/js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="assets/js/js/laydate.js"></script>
 	<script type="text/javascript" src="assets/js/echarts.min.js"></script>
@@ -76,7 +77,7 @@
 		    
 	        var option = {
 			    title : {
-			        text: '月消费情况',
+			        text: '消费情况',
 			        subtext: '数据分析',
 			        x:'center'
 			    },

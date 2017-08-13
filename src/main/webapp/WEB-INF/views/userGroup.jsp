@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>创建</title>
+	<title>我的家庭组</title>
 	<link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-theme.css">
@@ -189,7 +189,7 @@
 						<td align="center"><input type="checkbox" name="groupID" value="${user.userGroup.groupID}" hidden="hidden" checked="checked"/></td>
 						<td>${user.userGroup.groupID}</td>
 						<td class="td"  title="${user.userGroup.groupName}"><p class="td">${user.userGroup.groupName}</p></td>
-						<td>${user.userGroup.groupSum}</td>
+						<td id="groupSum">${user.userGroup.groupSum}</td>
 						<td class="td" title="${user.userGroup.groupMsg}"><p class="td">${user.userGroup.groupMsg}</p></td>
 					</tr>
 				</table>
@@ -256,6 +256,7 @@
 	            $('<td/>').append( $('<a/>').html('删除').attr({onclick:"ajax_test2("+users.userID+")",href:"javascript:void(0);"})).appendTo( tr );
 	            $('<td/>').append( $('<a/>').html('查看').attr('href','showMemberExpand?current=1&memberID='+users.userID)).appendTo( tr );
 	            $('table.z_i').append(tr);
+	            $('#groupSum').html(parseInt($('#groupSum').html())+1);
 	        
 			} else{
 				if(users.userPic === "123")
@@ -269,6 +270,7 @@
   		$.get('removeMember/' + userID,function(Msg){
   			if(Msg === 'ok'){
 				$('#'+userID).remove();
+				$('#groupSum').html(parseInt($('#groupSum').html())-1);
 			}
   		},'text')
   	}
